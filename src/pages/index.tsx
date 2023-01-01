@@ -22,7 +22,7 @@ const Home: React.FC = () => {
 
   useEffect((): any => {
     // connect to socket server
-    const socket = io("wss://bce4b2a0.fanoutcdn.com", {
+    const socket = io("/", {
       reconnectionDelayMax: 10000,
       path: "/api/chat"
     });
