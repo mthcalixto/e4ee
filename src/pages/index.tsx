@@ -22,7 +22,7 @@ const Home: React.FC = () => {
 
   useEffect((): any => {
     // connect to socket server
-    const socket = io("https://fgmbrw.sse.codesandbox.io", {
+    const socket = io("/", {
       reconnectionDelayMax: 10000,
       path: "/api/socketio"
     });
