@@ -22,7 +22,7 @@ const Home: React.FC = () => {
 
   useEffect((): any => {
     // connect to socket server
-    const socket = io(process.env.BASE_URL, {
+    const socket = io("e4ee.vercel.app", {
       reconnectionDelayMax: 10000,
       path: "/api/socketio"
     });
