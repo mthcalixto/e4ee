@@ -24,7 +24,7 @@ const Home: React.FC = () => {
     // connect to socket server
     const socket = io("/", {
       reconnectionDelayMax: 10000,
-      path: "/api/chat"
+      path: "/api/socketio"
     });
 
     // log socket connection
