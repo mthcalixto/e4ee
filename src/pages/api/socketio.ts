@@ -25,7 +25,7 @@ export default async (req: NextApiRequest, res: NextApiResponseServerIO) => {
     const io = new ServerIO(httpServer, {
       cors: {
     origin: "*",
-    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE']
       },
       path: "/api/socketio",
     });
