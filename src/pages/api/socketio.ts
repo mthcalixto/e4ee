@@ -27,8 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponseServerIO) => {
         origin: "*",
         methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
       },
-      path: "/api/socketio",
-      transports: ['websocket']
+      path: "/api/socketio"
     });
     // append SocketIO server to Next.js socket server response
     res.socket.server.io = io;
