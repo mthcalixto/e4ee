@@ -38,6 +38,7 @@ const Home: React.FC = () => {
     socket.on("message", (message: IMsg) => {
       chat.push(message);
       setChat([...chat]);
+      socket.emit('messageResponse', message);
     });
 
     // socket disconnet onUnmount if exists
