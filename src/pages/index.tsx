@@ -19,14 +19,17 @@ const Home: React.FC = () => {
   // init chat and message
   const [chat, setChat] = useState<IMsg[]>([]);
   const [msg, setMsg] = useState<string>("");
-
-  // connect to socket server
-  const socket = io("https://u23728378237823723232323.onrender.com", {
-    reconnectionDelayMax: 10000,
-    path: "/api/socketio",
-  });
+  const [socketNew, setSocketNew] = useState();
 
   useEffect((): any => {
+    // connect to socket server
+    const socket = io("https://u23728378237823723232323.onrender.com", {
+      reconnectionDelayMax: 10000,
+      path: "/api/socketio",
+    });
+
+    setSocketNew(socket);
+
     // log socket connection
     socket.on("connect", () => {
       console.log("SOCKET CONNECTED!", socket.id);
@@ -42,7 +45,7 @@ const Home: React.FC = () => {
 
     // socket disconnet onUnmount if exists
     if (socket) return () => socket.disconnect();
-  }, [socket, chat]);
+  }, []);
 
   const sendMessage = async () => {
     if (msg) {
@@ -52,7 +55,7 @@ const Home: React.FC = () => {
         msg,
       };
 
-      socket.emit("message", message, (res) => {
+      socketNew.emit("message", message, (res: { status: string }) => {
         if (res.status === "ok") setMsg("");
       });
 
