@@ -23,6 +23,10 @@ export default async (req: NextApiRequest, res: NextApiResponseServerIO) => {
     // adapt Next's net Server to http Server
     const httpServer: NetServer = res.socket.server as any;
     const io = new ServerIO(httpServer, {
+      cors: {
+    origin: "*",
+    methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+      },
       path: "/api/socketio",
     });
     // append SocketIO server to Next.js socket server response
