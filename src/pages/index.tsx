@@ -22,8 +22,7 @@ const Home: React.FC = () => {
 
   useEffect((): any => {
     // connect to socket server
-    const socket = io("https://test-bdgv.onrender.com", {
-      transports: ['websocket'],
+    const socket = io("https://u23728378237823723232323.onrender.com", {
       reconnectionDelayMax: 10000,
       path: "/api/socketio"
     });
