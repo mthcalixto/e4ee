@@ -53,9 +53,12 @@ const Home: React.FC = () => {
 
       console.log(message);
 
-      socket.emit("message", message, (res: { status: string }) => {
-        console.log(res);
-        if (res.status === "ok") setMsg("");
+      // update chat on new message dispatched
+      socket.on("message", () => {
+        socket.emit("message", message, (res: { status: string }) => {
+          console.log(res);
+          if (res.status === "ok") setMsg("");
+        });
       });
 
       // // dispatch message to other users
