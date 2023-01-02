@@ -19,13 +19,14 @@ const Home: React.FC = () => {
   // init chat and message
   const [chat, setChat] = useState<IMsg[]>([]);
   const [msg, setMsg] = useState<string>("");
+  const [socket, setSocket] = useState();
 
   useEffect((): any => {
     // connect to socket server
-    const socket = io("https://u23728378237823723232323.onrender.com", {
+    setSocket(io("https://u23728378237823723232323.onrender.com", {
       reconnectionDelayMax: 10000,
       path: "/api/socketio"
-    });
+    }));
 
     // log socket connection
     socket.on("connect", () => {
@@ -50,18 +51,19 @@ const Home: React.FC = () => {
         user,
         msg
       };
-
-      // dispatch message to other users
-      const resp = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(message)
+      
+      socket.emit("message", message).then((res) => {
+        if (res.ok) setMsg("");
       });
 
-      // reset field if OK
-      if (resp.ok) setMsg("");
+      // // dispatch message to other users
+      // const resp = await fetch("/api/chat", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify(message)
+      // });
     }
 
     // focus after click
