@@ -2,7 +2,6 @@ import { NextApiRequest } from "next";
 import { NextApiResponseServerIO } from "../../types/next";
 import { Server as ServerIO } from "socket.io";
 import { Server as NetServer } from "http";
-import NextCors from "nextjs-cors";
 
 export const config = {
   api: {
@@ -11,13 +10,6 @@ export const config = {
 };
 
 export default async (req: NextApiRequest, res: NextApiResponseServerIO) => {
-  await NextCors(req, res, {
-    // Options
-    methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-    origin: "*",
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  });
-
   if (!res.socket.server.io) {
     console.log("New Socket.io server...");
     // adapt Next's net Server to http Server
