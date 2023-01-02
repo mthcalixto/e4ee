@@ -51,6 +51,8 @@ const Home: React.FC = () => {
         msg,
       };
 
+      console.log(message);
+
       socket.emit("message", message, (res: { status: string }) => {
         console.log(res);
         if (res.status === "ok") setMsg("");
