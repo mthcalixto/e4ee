@@ -34,7 +34,7 @@ const Home: React.FC = () => {
     });
 
     // update chat on new message dispatched
-    socket.on("message", (message: IMsg) => {
+    socket.emit("message", (message: IMsg) => {
       chat.push(message);
       setChat([...chat]);
     });
