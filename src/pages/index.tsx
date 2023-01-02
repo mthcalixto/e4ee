@@ -53,22 +53,16 @@ const Home: React.FC = () => {
 
       console.log(message);
 
-      // update chat on new message dispatched
-      socket.on("message", () => {
-        socket.emit("message", message, (res: { status: string }) => {
-          console.log(res);
-          if (res.status === "ok") setMsg("");
-        });
+      // dispatch message to other users
+      const resp = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(message),
       });
 
-      // // dispatch message to other users
-      // const resp = await fetch("/api/chat", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify(message)
-      // });
+      if (resp.ok) setMsg("");
     }
 
     // focus after click
