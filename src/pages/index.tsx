@@ -52,8 +52,8 @@ const Home: React.FC = () => {
         msg,
       };
 
-      socket.emit("message", message).then((res) => {
-        if (res.ok) setMsg("");
+      socket.emit("message", message, (res) => {
+        if (res.status === "ok") setMsg("");
       });
 
       // // dispatch message to other users
